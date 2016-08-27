@@ -1,0 +1,25 @@
+<h1>Log in</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_tag sessions_path do %>
+      <div class="field">
+        <%= label_tag :login %>
+        <%= text_field_tag :login, nil, placeholder: 'ニックネームorメールアドレス', class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= label_tag :password %>
+        <%= password_field_tag :password, nil, placeholder: 'パスワード', class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+        <%= label_tag :remember_me %>
+      </div>
+      <div class="action"><%= submit_tag "Log in", class: "btn btn-primary" %>
+    <% end %>
+
+    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+  </div>
+</div>
+
+

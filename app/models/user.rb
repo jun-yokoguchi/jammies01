@@ -1,9 +1,10 @@
 class User < ApplicationRecord
-	before_save { self.email = self.email.downcase}
-	validates :nickname, presence: true, length: {maximum: 10 }
-	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-	validates :email, presence: true, length: { maximum: 255 },
-	                  format: { with: VALID_EMAIL_REGEX },
-	                  uniqueness: { case_sensitive: false }
-	has_secure_password
+  authenticates_with_sorcery!
+  
+  validates_confirmation_of :password
+  validates_presence_of :password, :on => :create
+  validates_presence_of :email
+  validates_uniqueness_of :email
+  validates_presence_of :nickname
+  validates_uniqueness_of :nickname
 end
