@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  
+  layout 'application'
+
   def show
   	@user = User.find(params[:id])
+    render :layout => 'users'
   end
 
   def new
@@ -11,6 +13,7 @@ class UsersController < ApplicationController
   def create 
   	@user = User.new(user_params)
   	if @user.save
+      log_in @user
   		flash[:success] = "Welcome to the Jammies!"
   		redirect_to @user
   	else
